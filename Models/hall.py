@@ -4,13 +4,15 @@ from shared.responseModel import ResponseModel
 
 class Hall():
     __name: str
-    __value: Group = None
-    __nighbors: set['Hall'] = set()
-    __prefrences: set[Group] = set()
+    __value: Group
+    __nighbors: set['Hall']
+    __prefrences: set[Group] 
     
     def __init__(self, name: str):
         self.__name = name
         self.__value = None
+        self.__nighbors = set()
+        self.__prefrences = set()
     
     
     def getName(self) -> str:
@@ -21,8 +23,7 @@ class Hall():
         if (value in self.__prefrences):
             self.__value = value
         else:
-            # raise Exception("value must be one of the likes")
-            pass
+            raise Exception("value must be one of the perferences")
 
 
     def getValue(self) -> Group:
@@ -34,10 +35,9 @@ class Hall():
         
     
     def addNighbor(self, nighbor: 'Hall'):
-        if (self.__value == nighbor.getValue()):
+        # if (self.__value == nighbor.getValue()):
             # raise Exception('Duplicate value')
-            pass
-        else:
+        # else:
             self.__nighbors.add(nighbor)
     
     
