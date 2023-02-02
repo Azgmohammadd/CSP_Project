@@ -5,4 +5,5 @@ class Group():
         self.__name = name
     
     def __str__(self):
-        return f'GroupName: {self.__name}'
+        # return f'GroupName: {self.__name}'
+        return self.__name
