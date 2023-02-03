@@ -59,5 +59,13 @@ class Hall():
         self.__prefrences = set(filter(lambda x: x.getName() != prefrence.getName(), self.__prefrences))
     
     
-    def getPefrences(self) -> set[Group]:
+    def getPrefrences(self) -> set[Group]:
         return self.__prefrences
+    
+    
+    def checkAll(halls : list['Hall']) -> bool:
+        for hall in halls:
+            if (hall.getValue() is None):
+                return False
+        
+        return True
