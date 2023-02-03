@@ -20,7 +20,7 @@ class Hall():
     
         
     def setValue(self, value: Group):
-        if (value in self.__prefrences):
+        if (self.isExistPrefrence(value)):
             self.__value = value
         else:
             raise Exception("value must be one of the perferences")
@@ -54,8 +54,21 @@ class Hall():
     
     
     def isExistPrefrence(self, prefrence: Group) -> bool:
-        return prefrence in self.__prefrences
+        for perf in self.__prefrences:
+            if (perf.getName() == prefrence.getName()):
+                return True
+
+        return False
     
     
-    def removePrefrence(self, prefrence: Group):
-        self.__prefrences.remove(prefrence)
+    def removePrefrence(self, prefrence: Group) -> ResponseModel:
+        self.__prefrences = set(filter(lambda x: x.getName() != prefrence.getName(), self.__prefrences))
+        
+        if(len(self.__prefrences) == 0):
+            return ResponseModel(self.__prefrences, False, 'No prefrences')
+    
+        return ResponseModel(self.__prefrences, True, 'Prefrence removed')
+    
+    
+    def getPefrences(self) -> set[Group]:
+        return self.__prefrences
