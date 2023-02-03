@@ -3,15 +3,25 @@ from Models.group import Group
 from copy import deepcopy
 
 #forward checking algorithm
-def forwardChecking(root: 'Hall', value: Group):
-    hall: Hall = deepcopy(root)
+def forwardChecking(halls: list[Hall]):
     
-    hall.setValue(value)
+    # hall: Hall = deepcopy(root)
     
-    for nighbor in hall.getNighbors():
-        if (nighbor.isExistPrefrence(value)):
-            nighbor.removePrefrence(value)
-            
+    for hall in halls:
+        if hall.getValue() != None:
+            continue
+        
+        try:
+            for value in hall.getPefrences():
+                hall.setValue(value)
+                
+                for nighbor in hall.getNighbors():
+                    copy_nighbor = deepcopy(nighbor)
+                    if (copy_nighbor.isExistPrefrence(value)):
+                        if (copy_nighbor.removePrefrence(value).hasError):
+                            print("remove prefrence")
     
-    print(hall)
-    
+        except Exception as e:
+            print(e)
+            print('Failed to forward checking')
+            pass    
