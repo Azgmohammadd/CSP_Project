@@ -1,6 +1,16 @@
 from Models.group import Group
 from Models.hall import Hall
 from algorithms.forward_checking import forwardChecking
+from shared.responseModel import ResponseModel
+
+def printResponse(response: ResponseModel):
+    if (response.hasError):
+        print(response.message)
+    else:
+        for hall in response.result:
+            print(f'{hall.getName()} {hall.getValue().getName()}')
+
+
 
 
 def main():
@@ -33,7 +43,9 @@ def main():
         hall.addNighbor(halls[int(hall_j) - 1])
           
           
-    forwardChecking(halls)
-            
+    fc_result = forwardChecking(halls)
+    
+    printResponse(fc_result)
+    
 if __name__ == '__main__':
     main()
