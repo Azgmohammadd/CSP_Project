@@ -61,13 +61,8 @@ class Hall():
         return False
     
     
-    def removePrefrence(self, prefrence: Group) -> ResponseModel:
+    def removePrefrence(self, prefrence: Group): # -> ResponseModel:
         self.__prefrences = set(filter(lambda x: x.getName() != prefrence.getName(), self.__prefrences))
-        
-        if(len(self.__prefrences) == 0):
-            return ResponseModel(self.__prefrences, False, 'No prefrences')
-    
-        return ResponseModel(self.__prefrences, True, 'Prefrence removed')
     
     
     def getPefrences(self) -> set[Group]:
