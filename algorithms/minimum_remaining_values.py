@@ -2,12 +2,14 @@ from copy import deepcopy
 from shared.responseModel import ResponseModel
 from Models.hall import Hall
 
-def MRV(halls: list[Hall]) -> ResponseModel:
-    copy_halls = deepcopy(halls)
-    copy_halls.sort(key=lambda hall: len(hall.getPefrences()))
+
+def MRV(halls: list[Hall]) -> Hall:
+    min_remaining_values = float('-inf')
+    selected_hall = None
+
+    for hall in halls:
+        if len(hall.getNighbors()) > min_remaining_values and hall.getValue() is None:
+            min_remaining_values = len(hall.getNighbors())
+            selected_hall = hall
     
-    for hall in copy_halls:
-        if (hall.getValue() == None):
-            return ResponseModel(halls.index(hall), False, 'MRV value found')
-    
-    return ResponseModel([], True, 'MRV value not found')
+    return selected_hall
