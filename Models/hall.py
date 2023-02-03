@@ -20,11 +20,8 @@ class Hall():
     
         
     def setValue(self, value: Group):
-        if (self.isExistPrefrence(value)):
-            self.__value = value
-        else:
-            raise Exception("value must be one of the perferences")
-
+        self.__value = value
+        
 
     def getValue(self) -> Group:
         return self.__value
@@ -35,10 +32,7 @@ class Hall():
         
     
     def addNighbor(self, nighbor: 'Hall'):
-        # if (self.__value == nighbor.getValue()):
-            # raise Exception('Duplicate value')
-        # else:
-            self.__nighbors.add(nighbor)
+        self.__nighbors.add(nighbor)
     
     
     def getNighbors(self) -> set['Hall']:
