@@ -1,5 +1,7 @@
 from Models.group import Group
 from Models.hall import Hall
+from algorithms.forward_checking import forwardChecking
+
 
 def main():
     # read text file
@@ -29,7 +31,9 @@ def main():
         
         hall = halls[int(hall_i) - 1]
         hall.addNighbor(halls[int(hall_j) - 1])
-            
+          
+          
+    forwardChecking(halls)
             
 if __name__ == '__main__':
     main()
