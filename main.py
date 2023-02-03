@@ -1,16 +1,10 @@
 from Models.group import Group
 from Models.hall import Hall
 from algorithms.forward_checking import forwardChecking
+from algorithms.minimum_remaining_values import MRV
+from algorithms.least_constraining_value import LCV
 from shared.responseModel import ResponseModel
-
-def printResponse(response: ResponseModel):
-    if (response.hasError):
-        print(response.message)
-    else:
-        for hall in response.result:
-            print(f'{hall.getName()} {hall.getValue().getName()}')
-
-
+    
 
 
 def main():
@@ -39,13 +33,13 @@ def main():
     for index in range(numberOfGroups + 2, len(lines)):
         hall_i, hall_j = lines[index].split()
         
-        hall = halls[int(hall_i) - 1]
-        hall.addNighbor(halls[int(hall_j) - 1])
+        halls[int(hall_i) - 1].addNighbor(halls[int(hall_j) - 1])
+        halls[int(hall_j) - 1].addNighbor(halls[int(hall_i) - 1])
           
           
-    fc_result = forwardChecking(halls)
+    fc_result = forwardChecking(halls= halls, index= 0, MRV= MRV, LCV= LCV)
     
-    printResponse(fc_result)
+    ResponseModel.printResponse(fc_result)
     
 if __name__ == '__main__':
     main()
