@@ -1,4 +1,5 @@
 from algorithms.minimum_remaining_values import MRV
+from algorithms.least_constraining_value import LCV
 from shared.responseModel import ResponseModel
 from Models.hall import Hall
 from copy import deepcopy
@@ -19,6 +20,9 @@ def forwardChecking(halls: list[Hall], index: int = 0) -> ResponseModel:
     if (len(hall.getPefrences()) == 0):
         return ResponseModel([], True, 'No prefrences')
     
+    # sort the preferences based on LCV heuristic
+    sortedPrefrences = LCV(hall, halls)
+
     for prefrence in hall.getPefrences():
         copy_halls = deepcopy(halls)
         hall = copy_halls[index]
