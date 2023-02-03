@@ -6,9 +6,9 @@ def LCV(hall: Hall) -> list:
     """Least Constraining Value heuristic"""
     
     nighbors = hall.getNighbors()
-    prefrences = hall.getPefrences()
+    prefrences = hall.getPrefrences()
     
     # sort the prefrences based on the number of remaining options of nighbors
-    sorted_prefrences = sorted(prefrences, key=lambda x: sum(1 for n in nighbors if x in n.getPefrences()))
+    sorted_prefrences = sorted(prefrences, key=lambda x: sum(1 for n in nighbors if x in n.getPrefrences()))
     
     return sorted_prefrences
