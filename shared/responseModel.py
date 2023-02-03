@@ -13,3 +13,12 @@ class ResponseModel():
     
     def __str__(self) -> str:
         return f"result: {self.result}, hasError: {self.hasError}, message: {self.message}"
+
+    
+    def printResponse(response: 'ResponseModel'):
+        if (response.hasError):
+            print(response.message)
+        else:
+            for hall in response.result:
+                print(f'{hall.getName()} {hall.getValue().getName()}')
+
