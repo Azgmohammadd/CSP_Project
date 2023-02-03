@@ -1,3 +1,4 @@
+from algorithms.minimum_remaining_values import MRV
 from shared.responseModel import ResponseModel
 from Models.hall import Hall
 from copy import deepcopy
@@ -11,7 +12,8 @@ def forwardChecking(halls: list[Hall], index: int = 0) -> ResponseModel:
     if (index == len(halls)):
         return ResponseModel(halls, False, 'forward checking completed')
         
-    hall = halls[index]
+    # hall = halls[index]
+    hall = MRV(halls).result
     
     # check if hall has prefrences to assign value
     if (len(hall.getPefrences()) == 0):
@@ -29,6 +31,8 @@ def forwardChecking(halls: list[Hall], index: int = 0) -> ResponseModel:
 
         # check if forward checking is completed successfully in the next halls  
         if (not forwardChecking(copy_halls, index + 1).hasError):
-            copy_halls = forwardChecking(copy_halls, index + 1).result 
+            next_index = MRV(copy_halls).result
+            
+            copy_halls = forwardChecking(copy_halls, next_index).result 
             
             return ResponseModel(copy_halls, False, 'forward checking completed')
