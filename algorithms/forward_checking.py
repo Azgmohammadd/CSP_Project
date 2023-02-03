@@ -1,27 +1,32 @@
+from shared.responseModel import ResponseModel
 from Models.hall import Hall
 from Models.group import Group
 from copy import deepcopy
 
+
 #forward checking algorithm
-def forwardChecking(halls: list[Hall]):
-    
-    # hall: Hall = deepcopy(root)
-    
-    for hall in halls:
-        if hall.getValue() != None:
-            continue
+def forwardChecking(halls: list[Hall], index: int = 0) -> ResponseModel:
+    """forward checking algorithm"""
+    if (index == len(halls)):
+        return ResponseModel(halls, False, 'forward checking completed')
         
-        try:
-            for value in hall.getPefrences():
-                hall.setValue(value)
-                
-                for nighbor in hall.getNighbors():
-                    copy_nighbor = deepcopy(nighbor)
-                    if (copy_nighbor.isExistPrefrence(value)):
-                        if (copy_nighbor.removePrefrence(value).hasError):
-                            print("remove prefrence")
+    hall = halls[index]
     
-        except Exception as e:
-            print(e)
-            print('Failed to forward checking')
-            pass    
+    if (len(hall.getPefrences()) == 0):
+        return ResponseModel([], True, 'No prefrences')
+    
+    for prefrence in hall.getPefrences():
+        copy_halls = deepcopy(halls)
+        hall = copy_halls[index]
+        
+        hall.setValue(prefrence)
+
+        # remove prefrence from nighbors
+        for nighbor in hall.getNighbors():
+            nighbor.removePrefrence(prefrence)
+
+        # check if forward checking is completed successfully in the next halls  
+        if (not forwardChecking(copy_halls, index + 1).hasError):
+            copy_halls = forwardChecking(copy_halls, index + 1).result
+            
+            return ResponseModel(copy_halls, False, 'forward checking completed')
