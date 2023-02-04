@@ -11,7 +11,7 @@ def AC3(halls: list[Hall]) -> ResponseModel:
         
         if revise(hall, neighbor):
             if len(hall.getPrefrences()) == 0:
-                return ResponseModel([], True, 'Contradiction detected in AC3')
+                return ResponseModel([], True, f'Contradiction detected in AC3. No prefrences for {hall.getName()}')
             
             for n in hall.getNeighbors():
                 if n != neighbor:

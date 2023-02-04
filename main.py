@@ -10,7 +10,7 @@ from shared.responseModel import ResponseModel
 
 def main():
     # read text file
-    with open('input.txt', 'r') as file:  
+    with open('test/input.txt', 'r') as file:  
         lines = file.read()
         
     # split text file into list of lines
@@ -37,6 +37,7 @@ def main():
         halls[int(hall_i) - 1].addNeighbor(halls[int(hall_j) - 1])
         halls[int(hall_j) - 1].addNeighbor(halls[int(hall_i) - 1])
           
+    file.close()
           
     fc_result = FC(halls= halls, index= 0, MRV= MRV, LCV= LCV, AC3 = AC3)
     

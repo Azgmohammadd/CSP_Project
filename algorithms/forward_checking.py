@@ -15,7 +15,7 @@ def FC(halls: list[Hall], index: int = 0, MRV = None, LCV = None, AC3= None) -> 
     
     # check if hall has prefrences to assign value
     if (len(hall.getPrefrences()) == 0):
-        return ResponseModel([], True, 'No prefrences')
+        return ResponseModel([], True, f'No prefrences for {hall.getName()}')
     
     prefrences = LCV(hall) if LCV is not None else hall.getPrefrences()
     
