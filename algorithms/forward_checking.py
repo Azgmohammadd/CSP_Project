@@ -1,5 +1,3 @@
-from algorithms.minimum_remaining_values import MRV
-from algorithms.least_constraining_value import LCV
 from shared.responseModel import ResponseModel
 from Models.hall import Hall
 from copy import deepcopy
@@ -7,8 +5,9 @@ from copy import deepcopy
 
 
 #forward checking algorithm
-def forwardChecking(halls: list[Hall], index: int = 0, MRV = None, LCV = None) -> ResponseModel:
+def FC(halls: list[Hall], index: int = 0, MRV = None, LCV = None, AC3= None) -> ResponseModel:
     """forward checking algorithm"""
+    halls = AC3(halls).result if AC3 is not None and not AC3(halls).hasError else halls 
     
     hall = MRV(halls) if MRV is not None else halls[index % len(halls)]
     
@@ -27,7 +26,7 @@ def forwardChecking(halls: list[Hall], index: int = 0, MRV = None, LCV = None) -
         hall.setValue(prefrence)
 
         # remove prefrence from nighbors
-        for nighbor in hall.getNighbors():
+        for nighbor in hall.getNeighbors():
             nighbor.removePrefrence(prefrence)
 
         # all halls are checked
@@ -35,7 +34,7 @@ def forwardChecking(halls: list[Hall], index: int = 0, MRV = None, LCV = None) -
             return ResponseModel(copy_halls, False, 'forward checking completed')
         
         # check if forward checking is completed successfully in the next halls  
-        forward = forwardChecking(halls = copy_halls, index = halls.index(MRV(halls)), MRV= MRV, LCV= LCV) if MRV is not None else forwardChecking(halls = copy_halls, index= index + 1)
+        forward = FC(halls = copy_halls, index = halls.index(MRV(halls)), MRV= MRV, LCV= LCV, AC3= AC3) if MRV is not None else FC(halls = copy_halls, index= index + 1)
                 
         if (not forward.hasError):
             copy_halls = forward.result 
