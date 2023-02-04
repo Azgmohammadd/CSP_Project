@@ -1,5 +1,3 @@
-from copy import deepcopy
-from shared.responseModel import ResponseModel
 from Models.hall import Hall
 from sys import maxsize
 

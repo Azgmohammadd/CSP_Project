@@ -1,8 +1,9 @@
 from Models.group import Group
 from Models.hall import Hall
-from algorithms.forward_checking import forwardChecking
+from algorithms.forward_checking import FC
 from algorithms.minimum_remaining_values import MRV
 from algorithms.least_constraining_value import LCV
+from algorithms.arc_consistency_3 import AC3
 from shared.responseModel import ResponseModel
     
 
@@ -33,11 +34,11 @@ def main():
     for index in range(numberOfGroups + 2, len(lines)):
         hall_i, hall_j = lines[index].split()
         
-        halls[int(hall_i) - 1].addNighbor(halls[int(hall_j) - 1])
-        halls[int(hall_j) - 1].addNighbor(halls[int(hall_i) - 1])
+        halls[int(hall_i) - 1].addNeighbor(halls[int(hall_j) - 1])
+        halls[int(hall_j) - 1].addNeighbor(halls[int(hall_i) - 1])
           
           
-    fc_result = forwardChecking(halls= halls, index= 0, MRV= MRV, LCV= LCV)
+    fc_result = FC(halls= halls, index= 0, MRV= MRV, LCV= LCV, AC3 = AC3)
     
     ResponseModel.printResponse(fc_result)
     

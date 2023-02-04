@@ -5,13 +5,13 @@ from shared.responseModel import ResponseModel
 class Hall():
     __name: str
     __value: Group
-    __nighbors: set['Hall']
+    __neighbors: set['Hall']
     __prefrences: set[Group] 
     
     def __init__(self, name: str):
         self.__name = name
         self.__value = None
-        self.__nighbors = set()
+        self.__neighbors = set()
         self.__prefrences = set()
     
     
@@ -27,16 +27,16 @@ class Hall():
         return self.__value
     
     
-    def updateNighbors(self, nighbors: set['Hall']):
-        self.__nighbors = nighbors
+    def updateNeighbors(self, neighbors: set['Hall']):
+        self.__neighbors = neighbors
         
     
-    def addNighbor(self, nighbor: 'Hall'):
-        self.__nighbors.add(nighbor)
+    def addNeighbor(self, neighbor: 'Hall'):
+        self.__neighbors.add(neighbor)
     
     
-    def getNighbors(self) -> set['Hall']:
-        return self.__nighbors
+    def getNeighbors(self) -> set['Hall']:
+        return self.__neighbors
     
     
     def addPrefrence(self, prefrence: Group):
