@@ -6,8 +6,8 @@ def MRV(halls: list[Hall]) -> Hall:
     selected_hall = None
 
     for hall in halls:
-        if len(hall.getPrefrences()) < min_remaining_values and hall.getValue() is None:
-            min_remaining_values = len(hall.getPrefrences())
+        if len(hall.getPreferences()) < min_remaining_values and hall.getValue() is None:
+            min_remaining_values = len(hall.getPreferences())
             selected_hall = hall
     
     return selected_hall

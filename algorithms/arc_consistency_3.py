@@ -10,7 +10,7 @@ def AC3(halls: list[Hall]) -> ResponseModel:
         hall, neighbor = queue.pop(0)
         
         if revise(hall, neighbor):
-            if len(hall.getPrefrences()) == 0:
+            if len(hall.getPreferences()) == 0:
                 return ResponseModel([], True, f'Contradiction detected in AC3. No prefrences for {hall.getName()}')
             
             for n in hall.getNeighbors():
@@ -25,9 +25,9 @@ def revise(hall: Hall, neighbor: Hall) -> bool:
     if not remove the value from hall's preferences"""
     revised = False
     
-    for value in hall.getPrefrences():
-        if not any(prefrence.getName() != value.getName() for prefrence in neighbor.getPrefrences()):
-            hall.removePrefrence(value)
+    for value in hall.getPreferences():
+        if not any(prefrence.getName() != value.getName() for prefrence in neighbor.getPreferences()):
+            hall.removePreference(value)
             revised = True
             
     return revised

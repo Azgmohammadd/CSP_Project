@@ -14,10 +14,10 @@ def FC(halls: list[Hall], index: int = 0, MRV = None, LCV = None, AC3= None) -> 
     index = halls.index(hall)
     
     # check if hall has prefrences to assign value
-    if (len(hall.getPrefrences()) == 0):
-        return ResponseModel([], True, f'No prefrences for {hall.getName()}')
+    if (len(hall.getPreferences()) == 0):
+        return ResponseModel([], True, f'No preferences for {hall.getName()}')
     
-    prefrences = LCV(hall) if LCV is not None else hall.getPrefrences()
+    prefrences = LCV(hall) if LCV is not None else hall.getPreferences()
     
     for prefrence in prefrences:
         copy_halls = deepcopy(halls)
@@ -27,7 +27,7 @@ def FC(halls: list[Hall], index: int = 0, MRV = None, LCV = None, AC3= None) -> 
 
         # remove prefrence from nighbors
         for nighbor in hall.getNeighbors():
-            nighbor.removePrefrence(prefrence)
+            nighbor.removePreference(prefrence)
 
         # all halls are checked
         if (Hall.checkAll(copy_halls)):
@@ -40,3 +40,5 @@ def FC(halls: list[Hall], index: int = 0, MRV = None, LCV = None, AC3= None) -> 
             copy_halls = forward.result 
             
             return ResponseModel(copy_halls, False, 'forward checking completed')
+        else :
+            return ResponseModel([], True, f'forward checking failed for {hall.getName()}.\n{forward.message}')
