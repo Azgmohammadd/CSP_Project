@@ -10,7 +10,7 @@ from shared.responseModel import ResponseModel
 
 def main():
     # read text file
-    with open('test/input.txt', 'r') as file:  
+    with open('test/test3.txt', 'r') as file:  
         lines = file.read()
         
     # split text file into list of lines
@@ -28,7 +28,7 @@ def main():
         prefences = lines[index].split()
         
         for preference in prefences:
-            halls[int(preference) - 1].addPrefrence(groups[index - 1])
+            halls[int(preference) - 1].addPreference(groups[index - 1])
             
     # add nighbors to halls
     for index in range(numberOfGroups + 2, len(lines)):
