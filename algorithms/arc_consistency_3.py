@@ -1,5 +1,5 @@
 from shared.responseModel import ResponseModel
-from Models.hall import Hall
+from models.hall import Hall
 
 
 def AC3(halls: list[Hall]) -> ResponseModel:

@@ -1,4 +1,4 @@
-from Models.hall import Hall
+from models.hall import Hall
 
 def LCV(hall: Hall) -> list:
     """Least Constraining Value heuristic"""

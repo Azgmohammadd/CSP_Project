@@ -1,4 +1,4 @@
-from Models.hall import Hall
+from models.hall import Hall
 from sys import maxsize
 
 def MRV(halls: list[Hall]) -> Hall:

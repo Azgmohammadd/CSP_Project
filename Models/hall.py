@@ -1,4 +1,4 @@
-from Models.group import Group
+from models.group import Group
 
 
 class Hall():

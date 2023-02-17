@@ -1,5 +1,5 @@
-from Models.group import Group
-from Models.hall import Hall
+from models.group import Group
+from models.hall import Hall
 from algorithms.forward_checking import FC
 from algorithms.minimum_remaining_values import MRV
 from algorithms.least_constraining_value import LCV
